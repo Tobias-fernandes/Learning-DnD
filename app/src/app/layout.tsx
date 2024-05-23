@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { InputContextProvider } from "@/context/InputValueContext";
 
 export const metadata: Metadata = {
   title: "WordQuest",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className="text-black bg-gray-200">{children}</body>
+      <body className="text-black bg-gray-200">
+        <InputContextProvider>{children}</InputContextProvider>
+      </body>
     </html>
   );
 }

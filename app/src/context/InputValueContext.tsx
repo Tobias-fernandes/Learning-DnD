@@ -1,18 +1,26 @@
-// import React, { createContext, useContext, Dispatch, SetStateAction } from 'react';
+"use client";
 
-// // Definindo o tipo para o valor do contexto
-// interface InputValueContextType {
-//   inputValue: string | null;
-//   setInputValue: Dispatch<SetStateAction<string | null>>;
-// }
+import { createContext, useState, Dispatch, SetStateAction } from "react";
 
-// // Criação do contexto com um valor inicial
-// export const InputValueContext = createContext<InputValueContextType>({
-//   inputValue: null,
-//   setInputValue: () => {},
-// });
+interface IInputContext {
+  input: string;
+  setInput: Dispatch<SetStateAction<string>>;
+}
 
-// // Custom hook para facilitar o uso do contexto
-// export function useInputValue() {
-//   return useContext(InputValueContext);
-// }
+// Initialize the context
+export const InputContext = createContext({} as IInputContext);
+
+// Create context provider
+export const InputContextProvider: React.FC<React.PropsWithChildren<{}>> = ({
+  children,
+}) => {
+  const [input, setInput] = useState<string>(""); // Initialize the state as an empty string
+
+  return (
+    <>
+      <InputContext.Provider value={{ input, setInput }}>
+        {children}
+      </InputContext.Provider>
+    </>
+  );
+};
